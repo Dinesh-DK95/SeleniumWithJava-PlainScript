@@ -56,26 +56,26 @@ public class Nykaa {
 		}else {
 			System.out.println("Title not matched");
 		}
-        //5) Click sort By and select customer top rated
+       		//5) Click sort By and select customer top rated
 		driver.findElementByXPath("//div[@class='sort-btn clearfix']").click();
 		
 		driver.findElementByXPath("//span[text()='customer top rated']").click();
 		//Sleep execution for 3 seconds , while DOM is getting loaded after previous action.
 		Thread.sleep(3000);
-        //6) Click Category and click Shampoo
+        	//6) Click Category and click Shampoo
 		driver.findElementByXPath("(//div[@class='clearfix'])[2]").click();
 		driver.findElementByXPath("(//label[@for='chk_Shampoo_undefined'])").click();
 		driver.findElementByXPath("((//label[@for='chk_Shampoo_undefined']))[2]").click();
 		//Sleep execution for 3 seconds , while DOM is getting loaded after previous action.
 		Thread.sleep(3000);
-        //7) check whether the Filter is applied with Shampoo
+        	//7) check whether the Filter is applied with Shampoo
 		String filter1 = driver.findElementByXPath("//ul[@class='pull-left applied-filter-lists']/li").getText();
 		System.out.println(filter1);
 		
 		String filter2 = driver.findElementByXPath("(//ul[@class='pull-left applied-filter-lists'])/li[2]").getText();
 		System.out.println(filter2);
-        if (filter1.contains("Shampoo")) {
-        	if (filter2.contains("Shampoo")) {
+        	if (filter1.contains("Shampoo")) {
+        		if (filter2.contains("Shampoo")) {
 				System.out.println("The filter Shampoo is applied ");	
 			}else {
 				System.out.println("The filter Shampoo1 is applied and Shampoo2 is not applied");
@@ -85,40 +85,40 @@ public class Nykaa {
 				System.out.println("The filter Shampoo1 is not applied");
 		}
         
-        //8) Click on L'Oreal Paris Colour Protect Shampoo
-        driver.findElementByXPath("//img[@src='https://images-static.nykaa.com/media/catalog/product/tr:w-276,h-276,cm-pad_resize/8/9/8901526102518_color_protect_shampoo_75ml_82.5ml__i1_1.png']").click();
-        //9) GO to the new window and select size as 175ml
-        Set<String> windows2 = driver.getWindowHandles();
-        List<String> winlist2 = new ArrayList<String>(windows2);  
-        driver.switchTo().window(winlist2.get(2));
-        driver.findElementByXPath("(//span[@class='size-pallets'])[2]").click();
+        	//8) Click on L'Oreal Paris Colour Protect Shampoo
+		driver.findElementByXPath("//img[@src='https://images-static.nykaa.com/media/catalog/product/tr:w-276,h-276,cm-pad_resize/8/9/8901526102518_color_protect_shampoo_75ml_82.5ml__i1_1.png']").click();
+		//9) GO to the new window and select size as 175ml
+		Set<String> windows2 = driver.getWindowHandles();
+		List<String> winlist2 = new ArrayList<String>(windows2);  
+		driver.switchTo().window(winlist2.get(2));
+		driver.findElementByXPath("(//span[@class='size-pallets'])[2]").click();
         
-        //10) Print the MRP of the product
-        System.out.println(driver.findElementByXPath("//span[@class='post-card__content-price-offer']").getText());
-        //11) Click on ADD to BAG
-        driver.findElementByXPath("(//button[@class='combo-add-to-btn prdt-des-btn js--toggle-sbag nk-btn nk-btn-rnd atc-simple m-content__product-list__cart-btn  '])").click();
-      //Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
-        Thread.sleep(2000);
-        //12) Go to Shopping Bag 
-        driver.findElementByXPath("//div[@class='AddToBagbox']").click();
-      //Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
-        Thread.sleep(2000);
-        //13) Print the Grand Total amount
-        System.out.println(driver.findElementByXPath("//div[@class='value medium-strong']").getText());
-        //14) Click Proceed
-        driver.findElementByXPath("//button[@class='btn full fill no-radius proceed ']").click();
-        //15) Click on Continue as Guest
-        driver.findElementByXPath("//button[@class='btn full big']").click();
-        //16) Print the warning message (delay in shipment)
-        System.out.println(driver.findElementByXPath("//div[@class='layout horizontal p10 communication-msg mtb10']/div").getText());
-        //17) Close all windows
-        driver.quit();
+		//10) Print the MRP of the product(Improvement:Remove special symbol using reg ex)
+		System.out.println(driver.findElementByXPath("//span[@class='post-card__content-price-offer']").getText());
+		//11) Click on ADD to BAG
+		driver.findElementByXPath("(//button[@class='combo-add-to-btn prdt-des-btn js--toggle-sbag nk-btn nk-btn-rnd atc-simple m-content__product-list__cart-btn  '])").click();
+	      	//Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(2000);
+		//12) Go to Shopping Bag 
+		driver.findElementByXPath("//div[@class='AddToBagbox']").click();
+	      	//Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(2000);
+		//13) Print the Grand Total amount(Enhancement:Remove special symbol using reg ex)
+		System.out.println(driver.findElementByXPath("//div[@class='value medium-strong']").getText());
+		//14) Click Proceed
+		driver.findElementByXPath("//button[@class='btn full fill no-radius proceed ']").click();
+		//15) Click on Continue as Guest
+		driver.findElementByXPath("//button[@class='btn full big']").click();
+		//16) Print the warning message (delay in shipment)
+		System.out.println(driver.findElementByXPath("//div[@class='layout horizontal p10 communication-msg mtb10']/div").getText());
+		//17) Close all windows
+		driver.quit();
+		}
+
 	}
 
-}
-
-// Some new learning
-// To Scroll down using JS executeScript by visibility of the element
-//driver.executeScript("arguments[0].scrollIntoView();", sortele);
-//sortele.click();
-//JavascriptExecutor js = (JavascriptExecutor) driver;
+	// Some new learning
+	// To Scroll down using JS executeScript by visibility of the element
+	//driver.executeScript("arguments[0].scrollIntoView();", sortele);
+	//sortele.click();
+	//JavascriptExecutor js = (JavascriptExecutor) driver;
