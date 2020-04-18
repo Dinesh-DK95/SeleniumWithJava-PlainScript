@@ -19,7 +19,6 @@ public class Myntra {
 	public static void main(String[] args) throws InterruptedException {
 
 		// To Disable Browser Notification.
-
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
 		//Launching chrome browser.
