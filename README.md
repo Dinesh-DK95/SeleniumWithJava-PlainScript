@@ -1,2 +1,2 @@
 # SeleniumWithJava-TCExercises
-Contains Selenium TestCases Without Framework Model 
+Contains Selenium TestCases Without Framework 
