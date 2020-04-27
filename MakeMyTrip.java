@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Book hotel in Make MyTrip
 public class MakeMyTrip {
@@ -25,6 +28,7 @@ public class MakeMyTrip {
 		//Set the chromedriver.exe file to the java class.
 		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
 		ChromeDriver driver= new ChromeDriver(options);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		//1) Go to https://www.makemytrip.com/
 		driver.get("https://www.makemytrip.com/");
 		// To Maximize the browser.
@@ -36,12 +40,17 @@ public class MakeMyTrip {
 
 		//2) Click Hotels
 		driver.findElementByXPath("//a[@href='https://www.makemytrip.com/hotels/']").click();
-		//Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
-		Thread.sleep(2000);
+		//Sleep execution for .5 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(500);
 		//3) Enter city as Goa, and choose Goa, India
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='hsw_inputField font30 lineHeight36 latoBlack']")));
 		driver.findElementByXPath("//input[@class='hsw_inputField font30 lineHeight36 latoBlack']").click();
+		//Sleep execution for .5 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(500);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Enter city/ Hotel/ Area/ Building']")));
 		driver.findElementByXPath("//input[@placeholder='Enter city/ Hotel/ Area/ Building']").sendKeys("Goa");
 		driver.findElementByXPath("//p[text()='Goa, India']").click();
+		// Need to Cahge the logic for date , since it is hardcoded
 		//4) Enter Check in date as Next month 15th (May 15) and Check out as start date+5
 		driver.findElementByXPath("//div[@aria-label='Wed May 20 2020']").click();
 		driver.findElementByXPath("//div[@aria-label='Mon May 25 2020']").click();
@@ -56,23 +65,30 @@ public class MakeMyTrip {
 		//6) Click Search button
 		driver.findElementByXPath("//button[text()='Search']").click();
 		//click to background visible 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='mmBackdrop wholeBlack']")));
 		driver.findElementByXPath("//div[@class='mmBackdrop wholeBlack']").click();
 		//7) Select locality as Baga
+		 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='Baga']")));
 		driver.findElementByXPath("//label[text()='Baga']").click();
-		//Sleep execution for 2 seconds , while DOM is getting loaded after previous action.
-		//Thread.sleep(2000);
+		//Sleep execution for .5 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(500);
 		//8) Select 5 start in Star Category under Select Filters
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='5 Star']")));
 		driver.findElementByXPath("//label[text()='5 Star']").click();
-		//Sleep execution for 3 seconds , while DOM is getting loaded after previous action.
-		Thread.sleep(3000);
+		//Sleep execution for .5 seconds , while DOM is getting loaded after previous action.
+		Thread.sleep(500);
 		//9) Click on the first resulting hotel and go to the new window
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='makeFlex spaceBetween'])[2]")));
 		driver.findElementByXPath("(//div[@class='makeFlex spaceBetween'])[2]").click();
 		Set<String> windows = driver.getWindowHandles();
 		List<String> WinLis = new ArrayList<String>(windows);
 		driver.switchTo().window(WinLis.get(1));
 		//Sleep execution for 3 seconds , while DOM is getting loaded after previous action.
+		// Webdriver Wait does'not work well . need to explore.
 		Thread.sleep(3000);
 		//10) Print the Hotel Name 
+		
 		System.out.println(driver.findElementByXPath("//h1").getText());
 		//11) Click MORE OPTIONS link and Select 3Months plan and close
 		driver.findElementByXPath("//span[text()='MORE OPTIONS']").click();
